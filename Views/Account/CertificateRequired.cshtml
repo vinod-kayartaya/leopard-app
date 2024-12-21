@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Certificate Required";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body text-center">
+                    <h2 class="card-title mb-4">Certificate Required</h2>
+                    
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger mb-4">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <p class="mb-4">To access the dashboard, you need to:</p>
+                    <ol class="text-start">
+                        <li>Install your certificate in the browser</li>
+                        <li>Ensure you're using HTTPS</li>
+                        <li>Allow the browser to use your certificate when prompted</li>
+                    </ol>
+
+                    <div class="mt-4">
+                        <a asp-action="Dashboard" class="btn btn-primary">Try Again</a>
+                        <form asp-action="Logout" method="post" class="d-inline ms-2">
+                            <button type="submit" class="btn btn-outline-secondary">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

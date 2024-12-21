@@ -1,0 +1,37 @@
+@model Employee
+@{
+    ViewData["Title"] = "Download Certificate";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body text-center">
+                    <h2 class="card-title mb-4">Download Your Certificate</h2>
+                    
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger mb-4">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <p class="mb-4">Please download your certificate file to proceed.</p>
+                    
+                    <form asp-action="ProcessCertificateDownload" method="post" class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-download me-2"></i>Download Certificate
+                        </button>
+                    </form>
+
+                    <form asp-action="Logout" method="post">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="bi bi-box-arrow-right me-2"></i>Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

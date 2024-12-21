@@ -1,15 +1,66 @@
+@model IEnumerable<admin_web.Models.Employee>
 @{
     ViewData["Title"] = "Employees";
 }
 
 <div class="container-fluid">
-    <h1 class="h2 mb-4">Employees</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2">Employees</h1>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>Add New Employee
+        </a>
+    </div>
     
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Employee List</h5>
-            <!-- Employee list will go here -->
-            <p>Employee list content coming soon...</p>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Hire Date</th>
+                            <th>Cert Download</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in Model)
+                        {
+                            <tr>
+                                <td>@employee.FirstName @employee.LastName</td>
+                                <td>@employee.Email</td>
+                                <td>@employee.Department</td>
+                                <td>@employee.Position</td>
+                                <td>@employee.HireDate.ToShortDateString()</td>
+                                <td>
+                                    <span class="badge @(employee.CertDownload == "Y" ? "bg-success" : "bg-secondary")">
+                                        @(employee.CertDownload == "Y" ? "Yes" : "No")
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @if (!Model.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">No employees found.</p>
+                </div>
+            }
         </div>
     </div>
 </div> 
